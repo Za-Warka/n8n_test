@@ -1,0 +1,18 @@
+name: AutoFix regression checks
+on:
+  push:
+    branches:
+      - 'ai-fix/**'
+permissions:
+  contents: read
+jobs:
+  regression:
+    name: autofix-regression
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Run regression suite
+        run: python3 autofix_demo/test_calculator.py
